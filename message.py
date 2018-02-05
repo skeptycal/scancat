@@ -1,4 +1,6 @@
 """Message allows output of messages to a websocket or via print."""
+import logging
+
 class Message():
     websocket = None
 
@@ -9,5 +11,6 @@ class Message():
             print('Sending: ' + message)
         else:
             print(message)
+
 
 msg = Message() # Import msg from message, set websocket, then use msg.send().

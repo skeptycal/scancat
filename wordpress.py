@@ -1,6 +1,7 @@
 """Utilities to parse WordPress site data."""
 import re
 import scan
+import logging
 from message import msg
 
 ## TODO: add check for possible fatal errors (missing `</html>` tag).
@@ -14,7 +15,7 @@ def version(soup):
     # https://github.com/wp-cli/checksum-command/blob/e7e6128e6a5115fea4c3e1e497c7ace2286f358d/src/Checksum_Core_Command.php#L217
     # TODO: Guess the feed URL if no link tags are found.
     if soup is None:
-        msg.send('⚠️ Error: No HTML content available.')
+        logging.info('⚠️ No HTML content available.')
         return
     feed_tags = soup.findAll('link', attrs={'type':'application/rss+xml'})
     feed_urls = [tag["href"] for tag in feed_tags]
@@ -61,7 +62,7 @@ def coming_soon_page(soup):
     FIXME: Text like, “New products coming soon” produces false positives.
     """
     if soup is None:
-        msg.send('⚠️ Error: No HTML content available.')
+        logging.info('⚠️ No HTML content available.')
         return
     coming_soon_strings = [
         'coming soon',
@@ -69,7 +70,7 @@ def coming_soon_page(soup):
     ]
     for string in coming_soon_strings:
         if soup.find_all(string=re.compile(string, re.IGNORECASE)):
-            msg.send('⚠️ Detected possible maintenance mode text: ' + '“' + string + '”')
+            logging.info('⚠️ Detected possible maintenance mode text: ' + '“' + string + '”')
             return
 
 

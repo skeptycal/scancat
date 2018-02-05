@@ -6,6 +6,8 @@ This tool accelerates the collection of data needed to solve support issues.
 The information it gives is publicly available via browser dev tools or DNS.
 """
 import sys
+import logging
+
 from message import msg
 import scan
 import spdns
@@ -19,6 +21,7 @@ from flask_sockets import Sockets
 # TODO: look at multithreading HTTP requests: https://stackoverflow.com/a/2846697/88487
 def start_scan(url, ws=None):
     """Scrape HTML from the URL and run tests."""
+    logging.basicConfig(level=logging.INFO)
     msg.websocket = ws
     msg.send('Scanning ' + url + '.')
     soup = scan.get(url)
@@ -62,7 +65,6 @@ def echo_socket(ws):
         URL = ws.receive()
         if URL:
             start_scan(URL, ws)
-            # ws.send('You sent: ' + message)
 
 
 @app.route('/')
@@ -72,4 +74,5 @@ def root():
 
 """Run via command line using first arg as URL."""
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     start_scan(sys.argv[1])
