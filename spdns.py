@@ -20,7 +20,7 @@ def guess_host(url):
             if host_found:
                 msg.send('ℹ️ A record points to ' + host + '.')
                 return
-    if not host_found:
+    if not host_found and ip:
         msg.send('ℹ️ A record points to ' + ip + '. Unknown host.')
 
 
@@ -40,9 +40,11 @@ def get_page_at_domain_ip(url):
                 continue
         return soup, ip
     except dns.resolver.NoNameservers:
-        msg.send('Nameserver not reachable (SERVFAIL) for ' + url + '.')
+        msg.send('Nameserver not reachable (SERVFAIL) for ' + url + '.', log=True)
+        return None, None
     except dns.resolver.NXDOMAIN:
-        msg.send('DNS query names do not exist (local or test domain?).')
+        msg.send('DNS query names do not exist (local or test domain?).', log=True)
+        return None, None
 
 
 def uses_cloudflare(url):
