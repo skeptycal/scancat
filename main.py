@@ -44,6 +44,7 @@ def start_scan(url, ws=None):
     msg.title('DNS')
     spdns.guess_host(url)
     spdns.uses_cloudflare(url)
+    spdns.has_mail(url)
 
 
 app = Flask(__name__)

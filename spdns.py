@@ -64,6 +64,14 @@ def uses_cloudflare(url):
         msg.send('DNS query names do not exist (local or test domain?).')
 
 
-def has_mail():
+def has_mail(url):
     """If the domain has MX records configured, what are they?"""
-    pass
+    url = scan.clean_url(url)
+    try:
+        answers = dns.resolver.query(url, 'MX')
+        for rdata in answers:
+            msg.send('ℹ️ Found MX record: ' + rdata.to_text())
+            return
+        msg.send('ℹ️ No MX records found for ' + url + '.')
+    except dns.resolver.NoAnswer:
+        msg.send('No MX record for ' + url + '.')
