@@ -18,7 +18,7 @@ def guess_host(url):
         for host, search_text in hosts.items():
             host_found = soup.find_all(string=re.compile(search_text))
             if host_found:
-                msg.send('ℹ️ A record points to ' + host + '.')
+                msg.send('ℹ️ A record points to ' + host + '. [' + ip + ']')
                 return
     if not host_found and ip:
         msg.send('ℹ️ A record points to ' + ip + '. Unknown host.')
