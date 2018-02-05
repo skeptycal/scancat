@@ -70,7 +70,7 @@ def coming_soon_page(soup):
     ]
     for string in coming_soon_strings:
         if soup.find_all(string=re.compile(string, re.IGNORECASE)):
-            msg.send('⚠️ Detected possible maintenance mode text: ' + '“' + string + '”')
+            msg.send('⚠️ Possible maintenance mode text: ' + '“' + string + '”')
             return
 
 

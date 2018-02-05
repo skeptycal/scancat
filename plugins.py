@@ -31,7 +31,7 @@ def detect_plugins(soup=None):
     ]
     for path in plugin_paths:
         if(soup.find_all(string=re.compile(path))):
-            msg.send('✅ Found ' + path.replace('/', '') + '.')
+            msg.send('🔌 Found ' + path.replace('/', '') + '.')
 
 
 def yoast(soup=None):
@@ -42,9 +42,9 @@ def yoast(soup=None):
     is_yoast = soup.find_all(string=re.compile(
         'optimized with the Yoast SEO plugin'))
     if is_yoast:
-        msg.send('✅ Yoast SEO seems active.')
+        msg.send('🔌 Yoast SEO seems active.')
     else:
-        msg.send('❌ Yoast SEO not found.')
+        msg.send('ℹ️ Yoast SEO not found.')
 
 
 def caching(soup=None):

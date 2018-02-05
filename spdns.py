@@ -18,10 +18,10 @@ def guess_host(url):
         for host, search_text in hosts.items():
             host_found = soup.find_all(string=re.compile(search_text))
             if host_found:
-                msg.send('✅ A record points to ' + host + '.')
+                msg.send('ℹ️ A record points to ' + host + '.')
                 return
     if not host_found:
-        msg.send('❌ A record points to ' + ip + '. Unknown host.')
+        msg.send('ℹ️ A record points to ' + ip + '. Unknown host.')
 
 
 def get_page_at_domain_ip(url):
@@ -53,7 +53,7 @@ def uses_cloudflare(url):
         answers = dns.resolver.query(url, 'NS')
         for rdata in answers:
             if 'cloudflare' in rdata.to_text():
-                msg.send('✅ Using Cloudflare ' + '[NS: ' + rdata.to_text() + ']')
+                msg.send('ℹ️ Using Cloudflare ' + '[NS: ' + rdata.to_text() + ']')
                 return
         msg.send('❌ Nameservers don’t appear to be Cloudflare’s.')
     except dns.resolver.NoAnswer:
