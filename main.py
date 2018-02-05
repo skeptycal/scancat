@@ -7,6 +7,7 @@ The information it gives is publicly available via browser dev tools or DNS.
 """
 import sys
 import logging
+import random
 
 from message import msg
 import scan
@@ -14,7 +15,7 @@ import spdns
 import plugins
 import wordpress
 import themes
-from flask import Flask
+from flask import Flask, render_template
 from flask_sockets import Sockets
 
 # TODO: put scans in /scans/ subdirectory with an __init__.py, then import scan.plugins, scan.dns, scan,wordpress, scan.themes
@@ -62,7 +63,22 @@ def echo_socket(ws):
 
 @app.route('/')
 def root():
-    return app.send_static_file('home.html')
+    cats = [
+        'acrobat',
+        'banjo',
+        'drink',
+        'facepalm',
+        'fly',
+        'gift',
+        'knead',
+        'love',
+        'meal',
+        'popcorn',
+        'purr',
+        'sleepy',
+        'walk',
+    ]
+    return render_template('home.html', cat=random.choice(cats))
 
 
 """Run via command line using first arg as URL."""
