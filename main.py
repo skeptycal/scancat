@@ -26,12 +26,12 @@ def start_scan(url, ws=None):
     msg.send('Scanning ' + url + '.', log=True)
     soup = scan.get(url)
 
-    msg.title('WordPress checks')
+    msg.title('WordPress')
     wordpress.is_wp(soup)
     wordpress.version(soup)
     wordpress.coming_soon_page(soup)
 
-    msg.title('Theme checks')
+    msg.title('Themes')
     if themes.is_genesis_child_theme(soup):
         msg.send('🎨 A Genesis child theme is active.')
     else:
@@ -42,12 +42,12 @@ def start_scan(url, ws=None):
     themes.print_theme_info(soup)
     themes.print_genesis_info(soup)
 
-    msg.title('Plugin checks')
+    msg.title('Plugins')
     plugins.detect_plugins(soup)
     plugins.yoast(soup)
     plugins.caching(soup)
 
-    msg.title('DNS checks')
+    msg.title('DNS')
     spdns.guess_host(url)
     spdns.uses_cloudflare(url)
 
