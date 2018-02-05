@@ -32,13 +32,7 @@ def start_scan(url, ws=None):
     wordpress.coming_soon_page(soup)
 
     msg.title('Themes')
-    if themes.is_genesis_child_theme(soup):
-        msg.send('🎨 A Genesis child theme is active.')
-    else:
-        msg.send('ℹ️ A Genesis child theme was not found (or may be minified).')
-        # TODO: best guess at the theme by grepping soup for 'themes/(.*)/'.
-        # TODO: move these print lines into the functions like others.
-
+    themes.is_genesis_child_theme(soup)
     themes.print_theme_info(soup)
     themes.print_genesis_info(soup)
 

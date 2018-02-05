@@ -14,10 +14,12 @@ def is_genesis_child_theme(soup=None):
         return
     info, _ = theme_info(soup)
     if info is None:
+        msg.send('ℹ️ A Genesis child theme was not found (or may be minified).')
+        # TODO: best guess at the theme by grepping soup for 'themes/(.*)/'.
         return False
     if 'template' in info and info['template'].lower() == 'genesis':
+        msg.send('🎨 A Genesis child theme is active.')
         return True
-    return False
 
 
 def print_genesis_info(soup=None):
