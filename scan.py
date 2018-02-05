@@ -12,7 +12,10 @@ from message import msg
 
 
 def get(url):
-    """Fetch HTML from the URL."""
+    """Fetch HTML from the URL.
+
+    Python's native html.parser will not auto-correct malformed HTML.
+    """
     if not re.match(r'http(s?)\:', url):
         url = 'http://' + url
     if not validators.url(url):

@@ -59,7 +59,7 @@ def is_wp(soup=None, url=None):
 
 def coming_soon_page(soup):
     """Look for possible coming soon page.
-    FIXME: Text like, “New products coming soon” produces false positives.
+    FIXME: Text like, “New products coming soon” produces false positives. Consider testing for low word count too?
     """
     if soup is None:
         logging.info('⚠️ No HTML content available.')

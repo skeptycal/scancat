@@ -44,7 +44,7 @@ def get_page_at_domain_ip(url):
         msg.send('Nameserver not reachable (SERVFAIL) for ' + url + '.', log=True)
         return None, None
     except dns.resolver.NXDOMAIN:
-        msg.send('DNS query names do not exist (local or test domain?).', log=True)
+        msg.send('DNS query failed (local, test, or bad domain?): ' + url, log=True)
         return None, None
 
 
@@ -62,7 +62,7 @@ def uses_cloudflare(url):
     except dns.resolver.NoAnswer:
         msg.send('No NS record for ' + url + '.')
     except dns.resolver.NXDOMAIN:
-        msg.send('DNS query names do not exist (local or test domain?).')
+        msg.send('DNS query failed (local, test, or bad domain?): ' + url)
 
 
 def has_mail(url):
@@ -76,3 +76,5 @@ def has_mail(url):
         msg.send('ℹ️ No MX records found for ' + url + '.')
     except dns.resolver.NoAnswer:
         msg.send('No MX record for ' + url + '.')
+    except dns.resolver.NXDOMAIN:
+        msg.send('DNS query failed (local, test, or bad domain?): ' + url)
