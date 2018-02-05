@@ -57,7 +57,7 @@ def uses_cloudflare(url):
             if 'cloudflare' in rdata.to_text():
                 msg.send('ℹ️ Using Cloudflare ' + '[NS: ' + rdata.to_text() + ']')
                 return
-        msg.send('❌ Nameservers don’t appear to be Cloudflare’s.')
+        msg.send('ℹ️ Not using shared Cloudflare nameservers.')
     except dns.resolver.NoAnswer:
         msg.send('No NS record for ' + url + '.')
     except dns.resolver.NXDOMAIN:
