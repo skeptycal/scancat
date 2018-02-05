@@ -48,10 +48,7 @@ def start_scan(url, ws=None):
     plugins.caching(soup)
 
     msg.title('DNS checks')
-    spdns.points_to_sp_sites(url)
-    spdns.points_to_synthesis(url)
-    spdns.points_to_rainmaker(url)
-    spdns.uses_wordpress_dot_com(url)
+    spdns.guess_host(url)
     spdns.uses_cloudflare(url)
 
 
