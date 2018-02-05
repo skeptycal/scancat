@@ -9,8 +9,9 @@ def guess_host(url):
         'WordPress.com' : 'wordpress.com',
         'StudioPress Sites' : 'StudioPress Sites',
         'Rainmaker Platform' : 'Welcome to Rainmaker',
-        'Synthesis' : 'Welcome to Synthesis',
+        'Synthesis Hosting' : 'Welcome to Synthesis',
         'Cloudflare' : 'Direct IP access not allowed',
+        'WP Engine' : 'pointed at WP Engine',
     }
     soup, ip = get_page_at_domain_ip(url)
     host_found = None
