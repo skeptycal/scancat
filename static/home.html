@@ -46,6 +46,7 @@
 
         function onOpen(evt) {
             writeToScreen("CONNECTED");
+            //checkForURLAndAutoSubmit
         }
 
         function onClose(evt) {
@@ -82,7 +83,7 @@
     <h1>scan.lol</h1>
 
     <form action="/" id="url-form">
-        <input type="text" id="url" placeholder="Enter the URL">
+        <input type="text" id="url">
         <button id="send">Scan</button>
     </form>
 

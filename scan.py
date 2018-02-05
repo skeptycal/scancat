@@ -7,6 +7,7 @@ import logging
 from urllib.parse import urlsplit
 import requests
 from bs4 import BeautifulSoup
+import validators
 from message import msg
 
 
@@ -14,6 +15,10 @@ def get(url):
     """Fetch HTML from the URL."""
     if not re.match(r'http(s?)\:', url):
         url = 'http://' + url
+    if not validators.url(url):
+        msg.send('⚠️ URL seems invalid: ' + url)
+        logging.info('⚠️ URL invalid: ' + url)
+        return None
     try:
         html = requests.get(url)
         html.raise_for_status()

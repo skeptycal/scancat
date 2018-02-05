@@ -39,7 +39,7 @@ def print_genesis_info(soup=None):
         genesis_theme_info, url = theme_info(None, [genesis_style_url])
         if genesis_theme_info and url:
             msg.send('- Genesis version: ' +
-                  genesis_theme_info['version'] + ' <a href="{0}">{0}</a>'.format(url))
+                  genesis_theme_info['version'] + ' <a href="{0}" target="_blank">{0}</a>'.format(url))
 
 
 def stylesheets(soup=None):
@@ -91,4 +91,4 @@ def print_theme_info(soup=None):
     else:
         msg.send(not_found_message)
     if 'version' in info:
-        msg.send('- Version: ' + info['version'] + ' <a href="{0}">{0}</a>'.format(url))
+        msg.send('- Version: ' + info['version'] + ' <a href="{0}" target="_blank">{0}</a>'.format(url))
