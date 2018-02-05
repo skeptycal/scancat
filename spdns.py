@@ -11,7 +11,7 @@ def guess_host(url):
         'Rainmaker Platform' : 'Welcome to Rainmaker',
         'Synthesis Hosting' : 'Welcome to Synthesis',
         'Cloudflare' : 'Direct IP access not allowed',
-        'WP Engine' : 'pointed at WP Engine',
+        'WP Engine' : 'pointed at WP Engine', # TODO: test further (WP Engine root pages 404 so suspect scan will fail?)
     }
     soup, ip = get_page_at_domain_ip(url)
     host_found = None
