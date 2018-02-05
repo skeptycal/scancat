@@ -23,7 +23,7 @@ def start_scan(url, ws=None):
     """Scrape HTML from the URL and run tests."""
     logging.basicConfig(level=logging.INFO)
     msg.websocket = ws
-    msg.send('Scanning ' + url + '.')
+    msg.send('Scanning ' + url + '.', log=True)
     soup = scan.get(url)
 
     msg.title('WordPress checks')

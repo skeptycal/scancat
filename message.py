@@ -4,8 +4,10 @@ import logging
 class Message():
     websocket = None
 
-    def send(self, message):
+    def send(self, message, log=False):
         """Send a message to the socket if open, otherwise print it."""
+        if log:
+            logging.info(message)
         if self.websocket and not self.websocket.closed:
             self.websocket.send(message)
             logging.debug('Sending: ' + message)
