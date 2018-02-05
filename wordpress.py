@@ -75,11 +75,12 @@ def coming_soon_page(soup):
 
 
 def html_end_tag_missing(html):
+    """Check raw HTML for missing </html>, which suggests a fatal error."""
     if html is None:
         logging.info('⚠️ No HTML content available.')
         return
     if '</html>' not in str(html):
-        msg.send('⚠️ Closing HTML tag seems absent. Check logs for fatal errors?')
+        msg.send('⚠️ Closing HTML tag seems absent. Check PHP logs for fatal errors?')
 
 
 def parse_stylesheet_header(css):
