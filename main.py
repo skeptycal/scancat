@@ -59,7 +59,7 @@ app = Flask(__name__)
 sockets = Sockets(app)
 
 
-@sockets.route('/echo')
+@sockets.route('/scan')
 def echo_socket(ws):
     while not ws.closed:
         URL = ws.receive()

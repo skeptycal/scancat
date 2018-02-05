@@ -14,7 +14,10 @@
     </style>
     <script language="javascript" type="text/javascript">
 
-        var wsUri = "ws://127.0.0.1:8000/echo";
+        var host = window.location.host; // Includes port number.
+        var protocol = window.location.protocol == 'http:' ? 'ws://' : 'wss://';
+        var wsUri = protocol + host + '/scan';
+
         var output, button, form, urlField;
 
         function init() {
