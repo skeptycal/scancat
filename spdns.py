@@ -56,7 +56,7 @@ def uses_cloudflare(url):
         answers = dns.resolver.query(url, 'NS')
         for rdata in answers:
             if 'cloudflare' in rdata.to_text():
-                msg.send('ℹ️ Using Cloudflare ' + '[NS: ' + rdata.to_text() + ']')
+                msg.send('🌩️ Using Cloudflare ' + '[NS: ' + rdata.to_text() + ']')
                 return
         msg.send('ℹ️ Not using shared Cloudflare nameservers.')
     except dns.resolver.NoAnswer:
