@@ -9,6 +9,7 @@ from message import msg
 
 def is_genesis_child_theme(soup=None):
     """Is the active theme a Genesis child theme?"""
+    # TODO: Make this non Genesis-specific; look for any parent theme.
     if soup is None:
         logging.info('⚠️ No HTML content available.')
         return
