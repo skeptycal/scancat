@@ -14,11 +14,12 @@ def guess_host(url):
     }
     soup, ip = get_page_at_domain_ip(url)
     host_found = None
-    for host, search_text in hosts.items():
-        host_found = soup.find_all(string=re.compile(search_text))
-        if host_found:
-            msg.send('✅ A record points to ' + host + '.')
-            return
+    if soup:
+        for host, search_text in hosts.items():
+            host_found = soup.find_all(string=re.compile(search_text))
+            if host_found:
+                msg.send('✅ A record points to ' + host + '.')
+                return
     if not host_found:
         msg.send('❌ A record points to ' + ip + '. Unknown host.')
 
