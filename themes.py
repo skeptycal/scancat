@@ -41,7 +41,7 @@ def print_genesis_info(soup=None):
             '/wp-content/', 1)[0] + '/wp-content/themes/genesis/style.css'
         genesis_theme_info, url = theme_info(None, [genesis_style_url])
         if genesis_theme_info and url:
-            msg.send('- Genesis version: ' +
+            msg.send('• Genesis version: ' +
                   genesis_theme_info['version'] + ' <a href="{0}" target="_blank">{0}</a>'.format(url))
 
 
@@ -90,8 +90,8 @@ def print_theme_info(soup=None):
         msg.send(not_found_message)
         return
     if 'theme_name' in info:
-        msg.send('- Theme name: ' + info['theme_name'])
+        msg.send('• Theme name: ' + info['theme_name'])
     else:
         msg.send(not_found_message)
     if 'version' in info:
-        msg.send('- Version: ' + info['version'] + ' <a href="{0}" target="_blank">{0}</a>'.format(url))
+        msg.send('• Version: ' + info['version'] + ' <a href="{0}" target="_blank">{0}</a>'.format(url))

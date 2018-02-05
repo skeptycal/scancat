@@ -5,19 +5,43 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Scan Cat</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/js/site.js"></script>
 </head>
 
 <body>
-    <img src="/static/images/cats/{{ cat }}.gif"/>
-    <h1>Scan Cat</h1>
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal">
+            <a class="pure-menu-heading" href="/">SCAN CAT</a>
 
-    <form action="/" id="url-form">
-        <input type="text" id="url" placeholder="Type your URL here">
-        <button id="send">Scan</button>
-    </form>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="/about/" class="pure-menu-link">About</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://github.com/nickcernis/scancat/" class="pure-menu-link">GitHub</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://github.com/nickcernis/scancat/issues/new" class="pure-menu-link">Report bug</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="splash-container">
+        <div class="splash">
+            <img src="/static/images/cats/{{ cat }}.gif" alt="An animated kitten" width="150"/>
+            <p class="splash-subhead">
+                Need info about a WordPress site? Ask Scan Cat!
+            </p>
+            <form action="/" id="url-form" class="pure-form">
+                <input type="text" id="url" placeholder="Type your URL here" class="pure-input-2-3">
+                <input id="send" type="submit" value="Scan it" class="pure-button pure-button-primary" />
+            </form>
+        </div>
+    </div>
 
     <div id="output"></div>
 </body>

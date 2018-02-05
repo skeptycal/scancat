@@ -30,7 +30,7 @@
     }
 
     function onOpen(evt) {
-        writeToScreen("😻 Connected.");
+        writeToScreen("😻 Scan Cat is connected.");
         checkForURLAndAutoSubmit();
     }
 

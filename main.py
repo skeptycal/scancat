@@ -24,7 +24,7 @@ def start_scan(url, ws=None):
     """Scrape HTML from the URL and run tests."""
     logging.basicConfig(level=logging.INFO)
     msg.websocket = ws
-    msg.send('Scanning ' + url + '.', log=True)
+    msg.send('🔍 Scanning ' + url + '.', log=True)
     soup, raw_html = scan.get(url)
 
     msg.title('WordPress')
@@ -48,6 +48,7 @@ def start_scan(url, ws=None):
     spdns.uses_cloudflare(url)
     spdns.has_mail(url)
 
+    msg.send('🏁 Scan complete.')
 
 app = Flask(__name__)
 sockets = Sockets(app)
