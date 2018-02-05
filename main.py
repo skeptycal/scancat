@@ -24,12 +24,13 @@ def start_scan(url, ws=None):
     logging.basicConfig(level=logging.INFO)
     msg.websocket = ws
     msg.send('Scanning ' + url + '.', log=True)
-    soup = scan.get(url)
+    soup, raw_html = scan.get(url)
 
     msg.title('WordPress')
     wordpress.is_wp(soup)
     wordpress.version(soup)
     wordpress.coming_soon_page(soup)
+    wordpress.html_end_tag_missing(raw_html)
 
     msg.title('Themes')
     themes.is_genesis_child_theme(soup)

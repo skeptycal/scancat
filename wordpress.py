@@ -23,7 +23,7 @@ def version(soup):
         msg.send('WordPress version could not be guessed (no feed URL found).')
         return
     for url in feed_urls:
-        soup = scan.get(url)
+        soup, _ = scan.get(url)
         if soup is None:
             continue
         generator_tag = soup.find('generator')
@@ -50,7 +50,7 @@ def is_wp(soup=None, url=None):
         msg.send('No HTML or URL provided.')
         return False
     if url and not soup:
-        soup = scan.get(url)
+        soup, _ = scan.get(url)
     has_wp_content = soup.find_all(string=re.compile('/wp-content/'))
     if has_wp_content:
         msg.send(wp_found_message)
@@ -72,6 +72,14 @@ def coming_soon_page(soup):
         if soup.find_all(string=re.compile(string, re.IGNORECASE)):
             msg.send('⚠️ Possible maintenance mode text: ' + '“' + string + '”')
             return
+
+
+def html_end_tag_missing(html):
+    if html is None:
+        logging.info('⚠️ No HTML content available.')
+        return
+    if '</html>' not in str(html):
+        msg.send('⚠️ Closing HTML tag seems absent. Check logs for fatal errors?')
 
 
 def parse_stylesheet_header(css):

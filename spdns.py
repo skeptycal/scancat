@@ -36,7 +36,7 @@ def get_page_at_domain_ip(url):
         soup = None
         for rdata in answers:
             ip = rdata.to_text()
-            soup = scan.get('http://' + ip)
+            soup, _ = scan.get('http://' + ip)
             if soup is None:
                 continue
         return soup, ip

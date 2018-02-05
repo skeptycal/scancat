@@ -21,16 +21,18 @@ def get(url):
     if not validators.url(url):
         msg.send('⚠️ URL seems invalid: ' + url)
         logging.info('⚠️ URL invalid: ' + url)
-        return None
+        return None, None
     try:
         html = requests.get(url)
         html.raise_for_status()
-        return BeautifulSoup(html.content, 'html.parser')
+        return BeautifulSoup(html.content, 'html.parser'), html.content
     except requests.HTTPError:
         logging.info('⚠️ Error: ' + str(html.status_code) +
               ' code returned from ' + url + '.')
+        return None, None
     except requests.ConnectionError as error:
         logging.info('⚠️ Error: Could not connect. ' + str(error))
+        return None, None
 
 
 def clean_url(url):
