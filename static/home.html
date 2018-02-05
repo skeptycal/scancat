@@ -46,7 +46,7 @@
 
         function onOpen(evt) {
             writeToScreen("😻 Connected.");
-            //checkForURLAndAutoSubmit
+            checkForURLAndAutoSubmit();
         }
 
         function onClose(evt) {
@@ -72,6 +72,14 @@
             pre.style.wordWrap = "break-word";
             pre.innerHTML = message;
             output.appendChild(pre);
+        }
+
+        function checkForURLAndAutoSubmit() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var requestedUrl = urlParams.get('url');
+            if (requestedUrl) {
+                doSend(requestedUrl);
+            }
         }
 
         window.addEventListener("load", init, false);
