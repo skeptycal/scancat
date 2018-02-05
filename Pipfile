@@ -10,6 +10,9 @@ name = "pypi"
 requests = "*"
 "beautifulsoup4" = "*"
 dnspython = "*"
+flask-sockets = "*"
+flask = "*"
+gunicorn = "*"
 
 
 [dev-packages]

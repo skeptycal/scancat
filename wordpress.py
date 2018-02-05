@@ -1,6 +1,7 @@
 """Utilities to parse WordPress site data."""
 import re
 import scan
+from message import msg
 
 ## TODO: add check for possible fatal errors (missing `</html>` tag).
 
@@ -13,12 +14,12 @@ def version(soup):
     # https://github.com/wp-cli/checksum-command/blob/e7e6128e6a5115fea4c3e1e497c7ace2286f358d/src/Checksum_Core_Command.php#L217
     # TODO: Guess the feed URL if no link tags are found.
     if soup is None:
-        print('⚠️ Error: No HTML content available.')
+        msg.send('⚠️ Error: No HTML content available.')
         return
     feed_tags = soup.findAll('link', attrs={'type':'application/rss+xml'})
     feed_urls = [tag["href"] for tag in feed_tags]
     if not feed_urls:
-        print('WordPress version could not be guessed (no feed URL found).')
+        msg.send('WordPress version could not be guessed (no feed URL found).')
         return
     for url in feed_urls:
         soup = scan.get(url)
@@ -29,7 +30,7 @@ def version(soup):
             wp_version_text = generator_tag.getText().split('v=')
             if len(wp_version_text) > 1:
                 wp_version = wp_version_text[1]
-                print('WordPress version: ' + wp_version + '.')
+                msg.send('WordPress version: ' + wp_version + '.')
                 return
 
 
@@ -45,13 +46,13 @@ def is_wp(soup=None, url=None):
     """
     wp_found_message = '✅ WordPress detected.'
     if url is None and soup is None:
-        print('No HTML or URL provided.')
+        msg.send('No HTML or URL provided.')
         return False
     if url and not soup:
         soup = scan.get(url)
     has_wp_content = soup.find_all(string=re.compile('/wp-content/'))
     if has_wp_content:
-        print(wp_found_message)
+        msg.send(wp_found_message)
         return True
 
 
@@ -60,7 +61,7 @@ def coming_soon_page(soup):
     FIXME: Text like, “New products coming soon” produces false positives.
     """
     if soup is None:
-        print('⚠️ Error: No HTML content available.')
+        msg.send('⚠️ Error: No HTML content available.')
         return
     coming_soon_strings = [
         'coming soon',
@@ -68,7 +69,7 @@ def coming_soon_page(soup):
     ]
     for string in coming_soon_strings:
         if soup.find_all(string=re.compile(string, re.IGNORECASE)):
-            print('⚠️ Detected possible maintenance mode page.')
+            msg.send('⚠️ Detected possible maintenance mode text: ' + '“' + string + '”')
             return
 
 

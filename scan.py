@@ -6,6 +6,7 @@ import re
 from urllib.parse import urlsplit
 import requests
 from bs4 import BeautifulSoup
+from message import msg
 
 
 def get(url):
@@ -17,10 +18,10 @@ def get(url):
         html.raise_for_status()
         return BeautifulSoup(html.content, 'html.parser')
     except requests.HTTPError:
-        print('⚠️ Error: ' + str(html.status_code) +
+        msg.send('⚠️ Error: ' + str(html.status_code) +
               ' code returned from ' + url + '.')
     except requests.ConnectionError as error:
-        print('⚠️ Error: Could not connect. ' + str(error))
+        msg.send('⚠️ Error: Could not connect. ' + str(error))
 
 
 def clean_url(url):
