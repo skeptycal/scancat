@@ -29,6 +29,23 @@ Scan Cat is currently optimised for WordPress sites and StudioPress themes and p
 3. Run `gunicorn -k flask_sockets.worker main:app`.
 4. Visit http://127.0.0.1:8000.
 
+Or with the [heroku CLI](https://devcenter.heroku.com/articles/heroku-cli):
+
+1. Do `pipenv install`.
+2. Do `pipenv shell`.
+3. Run `heroku local`.
+4. Visit http://127.0.0.1:5000.
+
+
+## To deploy to Heroku
+1. `heroku create`
+2. `git push heroku master`
+3. `heroku open`
+
+## To update Heroku
+1. Make changes.
+2. `git push heroku master`.
+
 ## Credits
 Cat illustrations by Denis Sazhin ([Ikonka.com](http://iconka.com/en/)).
 Commercial licenses available from http://iconka.com/en/licensing/.
