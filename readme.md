@@ -1,6 +1,6 @@
 # Scan Cat: a website scanning and diagnostic tool
 
-Scan Cat retrieves public information about websites faster than humans can. It's available at https://scancat.io.
+Scan Cat retrieves public information about websites faster than humans can. It's available at https://www.scancat.io.
 
 Scan Cat lets support teams and developers grab facts and guesstimates to help with troubleshooting, returning information such as:
 
@@ -18,7 +18,7 @@ Scan Cat lets support teams and developers grab facts and guesstimates to help w
 
 ## Features
 You can pass a URL to Scan Cat with with the url param:
-https://scancat.io/?url=example.com
+https://www.scancat.io/?url=example.com
 
 ## Limitations
 Scan Cat is currently optimised for WordPress sites and StudioPress themes and plugins. Other platform and theme support is planned.
