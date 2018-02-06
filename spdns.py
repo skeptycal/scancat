@@ -6,11 +6,15 @@ from message import msg
 
 def guess_host(url):
     hosts = {
-        'WordPress.com' : 'wordpress.com',
-        'StudioPress Sites' : 'StudioPress Sites',
-        'Rainmaker Platform' : 'Welcome to Rainmaker',
-        'Synthesis Hosting' : 'Welcome to Synthesis',
+        'Amazon S3' : 'Amazon S3',
         'Cloudflare' : 'Direct IP access not allowed',
+        'Heroku' : 'herokucdn.com',
+        'InMotion Hosting' : 'inmotionhosting.com',
+        'SiteGround' : 'provided by SiteGround.com',
+        'StudioPress Sites' : 'StudioPress Sites',
+        'Synthesis Hosting' : 'Welcome to Synthesis',
+        'The Rainmaker Platform' : 'Welcome to Rainmaker',
+        'WordPress.com' : 'wordpress.com',
         'WP Engine' : 'pointed at WP Engine',
     }
     html, ip = get_page_at_domain_ip(url)
