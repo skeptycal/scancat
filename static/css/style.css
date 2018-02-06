@@ -139,6 +139,9 @@ a.pure-button-primary {
     color: #AECFE5;
 }
 
+.pure-menu-horizontal {
+    white-space: normal;
+}
 
 /*
  * -- SPLASH STYLES --
