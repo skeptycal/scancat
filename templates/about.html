@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scan Cat — About</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="about">
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal">
+            <a class="pure-menu-heading" href="/">SCAN CAT</a>
+
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="/" class="pure-menu-link">Home</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="/about/" class="pure-menu-link">About</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://github.com/nickcernis/scancat/" class="pure-menu-link">GitHub</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://github.com/nickcernis/scancat/issues/new" class="pure-menu-link">Report bug</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="output">
+        <h2>About Scan Cat</h2>
+        <p>Scan Cat retrieves public information about websites faster than humans can.</p>
+        <p>It lets support teams and developers grab facts and guesstimates to help with troubleshooting, returning information
+            such as:</p>
+        <ul>
+            <li>
+                What version of WordPress is installed?
+            </li>
+            <li>
+                Which Genesis child theme is active? What version?
+            </li>
+            <li>
+                Which version of Genesis is installed?
+            </li>
+            <li>
+                Is the site behind a maintenance mode page?
+            </li>
+            <li>
+                Has the site experienced a silent fatal error? (Finds missing <code>&lt;/html&gt;</code> tags).
+            </li>
+            <li>
+                Which popular plugins seem active?
+            </li>
+            <li>
+                Is Yoast SEO in use?
+            </li>
+            <li>
+                Are common caching plugins active?
+            </li>
+            <li>
+                Which host do A records currently point to?
+            </li>
+            <li>
+                Is Cloudflare in use?
+            </li>
+            <li>
+                Are mail records set up for the domain?
+            </li>
+        </ul>
+
+        <h2>Features</h2>
+        <p>You can pass a URL to Scan Cat with with the url param:<br> <a href="https://scancat.io/?url=example.com">https://scancat.io/?url=example.com</a></p>
+
+        <h2>Limitations</h2>
+        <p>Scan Cat is currently optimised for WordPress sites and StudioPress themes and plugins. Other platform and theme support is planned.</p>
+
+        <h2>Contact or contribute</h2>
+        <p>Scan Cat is written by <a href="https://thisisforeveryone.com/">Nick Cernis</a>. Find the <a href="https://github.com/nickcernis/scancat">source on GitHub</a> or <a href="https://github.com/nickcernis/scancat/issues">report issues and feature requests here</a>.</p>
+
+        <h2>Credits</h2>
+        <p>Cat illustrations by Denis Sazhin at <a href="http://ikonka.com/en/">ikonka.com</a>. Find <a href="http://iconka.com/en/licensing/">commercial licenses here</a>.</p>
+        <p>The site is programmed in <a href="https://www.python.org/">Python</a> with <a href="http://flask.pocoo.org/">Flask</a>, <a href="https://github.com/kennethreitz/flask-sockets">Flask-Sockets</a>, and <a href="https://www.crummy.com/software/BeautifulSoup/">Beautiful Soup</a>. It’s hosted with <a href="https://www.heroku.com/">Heroku</a>.</p>
+    </div>
+</body>
+
+</html>

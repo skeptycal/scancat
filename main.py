@@ -82,6 +82,11 @@ def root():
     return render_template('home.html', cat=random.choice(cats))
 
 
+@app.route('/about/')
+def about():
+    return render_template('about.html')
+
+
 """Run via command line using first arg as URL."""
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
