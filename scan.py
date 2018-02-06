@@ -20,7 +20,8 @@ def get(url):
         logging.info('⚠️ URL invalid: ' + url)
         return None, None
     try:
-        html = requests.get(url)
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
+        html = requests.get(url, headers=headers)
         html.raise_for_status()
         return BeautifulSoup(html.content, 'html.parser'), html.content
     except requests.HTTPError:
