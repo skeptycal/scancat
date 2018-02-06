@@ -26,6 +26,18 @@ label {
     color: #34495e;
 }
 
+a {
+    color: #1f8dd6;
+}
+
+a:hover {
+    opacity: .8;
+}
+
+a:visited {
+    opacity: .8;
+}
+
 .pure-img-responsive {
     max-width: 100%;
     height: auto;
