@@ -17,7 +17,7 @@ Scan Cat lets support teams and developers grab facts and guesstimates to help w
 - Are mail records set up for the domain?
 
 ## Features
-You can pass a URL to Scan Cat with with the url param:
+You can pass a URL to Scan Cat with the url param:
 https://www.scancat.io/?url=example.com
 
 ## Limitations
