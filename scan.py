@@ -11,7 +11,7 @@ import validators
 from message import msg
 
 
-def get(url):
+def get(url, raise_for_status=True):
     """Fetch HTML from the URL."""
     if not re.match(r'http(s?)\:', url):
         url = 'http://' + url
@@ -22,7 +22,8 @@ def get(url):
     try:
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
         html = requests.get(url, headers=headers)
-        html.raise_for_status()
+        if raise_for_status:
+            html.raise_for_status()
         return BeautifulSoup(html.content, 'html.parser'), html.content
     except requests.HTTPError:
         logging.info('⚠️ Error: ' + str(html.status_code) +
