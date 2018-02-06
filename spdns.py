@@ -13,12 +13,11 @@ def guess_host(url):
         'Cloudflare' : 'Direct IP access not allowed',
         'WP Engine' : 'pointed at WP Engine',
     }
-    soup, ip = get_page_at_domain_ip(url)
+    html, ip = get_page_at_domain_ip(url)
     host_found = None
-    if soup:
+    if html:
         for host, search_text in hosts.items():
-            host_found = soup.find_all(string=re.compile(search_text))
-            if host_found:
+            if search_text in str(html):
                 msg.send('ℹ️ A record points to ' + host + '. [' + ip + ']')
                 return
     if not host_found and ip:
@@ -36,10 +35,10 @@ def get_page_at_domain_ip(url):
         soup = None
         for rdata in answers:
             ip = rdata.to_text()
-            soup, _ = scan.get('http://' + ip, raise_for_status=False)
-            if soup is None:
+            _, raw_html = scan.get('http://' + ip, raise_for_status=False)
+            if raw_html is None:
                 continue
-        return soup, ip
+        return raw_html, ip
     except dns.resolver.NoNameservers:
         msg.send('Nameserver not reachable (SERVFAIL) for ' + url + '.', log=True)
         return None, None
