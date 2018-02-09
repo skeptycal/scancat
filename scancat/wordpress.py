@@ -1,10 +1,9 @@
 """Utilities to parse WordPress site data."""
 import re
-import scan
 import logging
-from message import msg
 
-## TODO: add check for possible fatal errors (missing `</html>` tag).
+from . import scan
+from .message import msg
 
 
 def version(soup):

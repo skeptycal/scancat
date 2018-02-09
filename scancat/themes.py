@@ -1,10 +1,11 @@
 """Probe a WordPress site for theme information."""
 import logging
 
-import wordpress as wp
 import requests
 from bs4 import BeautifulSoup
-from message import msg
+
+from . import wordpress as wp
+from .message import msg
 
 
 def is_genesis_child_theme(soup=None):

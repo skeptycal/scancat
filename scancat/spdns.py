@@ -1,7 +1,9 @@
 import re
+
 import dns.resolver
-import scan
-from message import msg
+
+from . import scan
+from .message import msg
 
 
 def guess_host(url):

@@ -1,7 +1,8 @@
 """Scan HTML content for active plugins."""
 import re
 import logging
-from message import msg
+
+from .message import msg
 
 
 def detect_plugins(soup=None):

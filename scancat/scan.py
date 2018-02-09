@@ -5,10 +5,12 @@ WordPress sites and StudioPress themes and plugins.
 import re
 import logging
 from urllib.parse import urlsplit
+
 import requests
 from bs4 import BeautifulSoup
 import validators
-from message import msg
+
+from .message import msg
 
 
 def get(url, raise_for_status=True):

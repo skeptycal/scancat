@@ -1,25 +1,58 @@
 """
-A site diagnostic scanner for StudioPress support.
+A site diagnostic scanner.
 
-The StudioPress team often has to debug WordPress sites without admin access.
-This tool accelerates the collection of data needed to solve support issues.
-The information it gives is publicly available via browser dev tools or DNS.
+This tool accelerates the collection of data needed to solve support issues
+with websites. The information it gives is publicly available via browser
+developer tools and DNS.
 """
 import sys
 import logging
 import random
 
-from message import msg
-import scan
-import spdns
-import plugins
-import wordpress
-import themes
 from flask import Flask, render_template
 from flask_sockets import Sockets
 
-# TODO: put scans in /scans/ subdirectory with an __init__.py, then import scan.plugins, scan.dns, scan,wordpress, scan.themes
-# TODO: look at multithreading HTTP requests: https://stackoverflow.com/a/2846697/88487
+from scancat import plugins, scan, spdns, themes, wordpress
+from scancat.message import msg
+
+
+app = Flask(__name__)
+sockets = Sockets(app)
+
+
+@app.route('/')
+def root():
+    cats = [
+        'acrobat',
+        'banjo',
+        'drink',
+        'facepalm',
+        'fly',
+        'gift',
+        'knead',
+        'love',
+        'meal',
+        'popcorn',
+        'purr',
+        'sleepy',
+        'walk',
+    ]
+    return render_template('home.html', cat=random.choice(cats))
+
+
+@app.route('/about/')
+def about():
+    return render_template('about.html')
+
+
+@sockets.route('/scan')
+def echo_socket(ws):
+    while not ws.closed:
+        URL = ws.receive()
+        if URL:
+            start_scan(URL, ws)
+
+
 def start_scan(url, ws=None):
     """Scrape HTML from the URL and run tests."""
     logging.basicConfig(level=logging.INFO)
@@ -49,42 +82,6 @@ def start_scan(url, ws=None):
     spdns.has_mail(url)
 
     msg.send('🏁 Scan complete.')
-
-app = Flask(__name__)
-sockets = Sockets(app)
-
-
-@sockets.route('/scan')
-def echo_socket(ws):
-    while not ws.closed:
-        URL = ws.receive()
-        if URL:
-            start_scan(URL, ws)
-
-
-@app.route('/')
-def root():
-    cats = [
-        'acrobat',
-        'banjo',
-        'drink',
-        'facepalm',
-        'fly',
-        'gift',
-        'knead',
-        'love',
-        'meal',
-        'popcorn',
-        'purr',
-        'sleepy',
-        'walk',
-    ]
-    return render_template('home.html', cat=random.choice(cats))
-
-
-@app.route('/about/')
-def about():
-    return render_template('about.html')
 
 
 """Run via command line using first arg as URL."""
