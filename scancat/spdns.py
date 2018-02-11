@@ -7,17 +7,23 @@ from .message import msg
 
 
 def guess_host(url):
+    """Guess the host by scraping the HTML page at the domain's A record IP.
+
+    :param url: The site address
+    :type url: string
+    """
+
     hosts = {
-        'Amazon S3' : 'Amazon S3',
-        'Cloudflare' : 'Direct IP access not allowed',
-        'Heroku' : 'herokucdn.com',
-        'InMotion Hosting' : 'inmotionhosting.com',
-        'SiteGround' : 'provided by SiteGround.com',
-        'StudioPress Sites' : 'StudioPress Sites',
-        'Synthesis Hosting' : 'Welcome to Synthesis',
-        'The Rainmaker Platform' : 'Welcome to Rainmaker',
-        'WordPress.com' : 'wordpress.com',
-        'WP Engine' : 'pointed at WP Engine',
+        'Amazon S3': 'Amazon S3',
+        'Cloudflare': 'Direct IP access not allowed',
+        'Heroku': 'herokucdn.com',
+        'InMotion Hosting': 'inmotionhosting.com',
+        'SiteGround': 'provided by SiteGround.com',
+        'StudioPress Sites': 'StudioPress Sites',
+        'Synthesis Hosting': 'Welcome to Synthesis',
+        'The Rainmaker Platform': 'Welcome to Rainmaker',
+        'WordPress.com': 'wordpress.com',
+        'WP Engine': 'pointed at WP Engine',
     }
     html, ip = get_page_at_domain_ip(url)
     host_found = None
@@ -31,9 +37,12 @@ def guess_host(url):
 
 
 def get_page_at_domain_ip(url):
-    """Given a URL, loop through A record IPs and return HTML from first that loads.
+    """Return HTML from first A record IP address that loads.
 
-    Server default pages often given info about the web host who runs them.
+    :param url: The site address
+    :type url: string
+    :return: Tuple of raw HTML and IP
+    :rtype: string, string or None, None
     """
     url = scan.clean_url(url)
     try:
@@ -46,7 +55,8 @@ def get_page_at_domain_ip(url):
                 continue
         return raw_html, ip
     except dns.resolver.NoNameservers:
-        msg.send('Nameserver not reachable (SERVFAIL) for ' + url + '.', log=True)
+        msg.send('Nameserver not reachable (SERVFAIL) for ' +
+                 url + '.', log=True)
         return None, None
     except dns.resolver.NXDOMAIN:
         msg.send('DNS query failed (local, test, or bad domain?): ' + url, log=True)
@@ -54,14 +64,18 @@ def get_page_at_domain_ip(url):
 
 
 def uses_cloudflare(url):
-    """Do NS records point to Cloudflare?"""
-    # TODO: Include check for private CF nameservers. HEAD and grep for CF headers?
+    """Output message if NS records point to Cloudflare.
+
+    :param url: The site address
+    :type url: string
+    """
     url = scan.clean_url(url)
     try:
         answers = dns.resolver.query(url, 'NS')
         for rdata in answers:
             if 'cloudflare' in rdata.to_text():
-                msg.send('🌩️ Using Cloudflare ' + '[NS: ' + rdata.to_text() + ']')
+                msg.send('🌩️ Using Cloudflare ' +
+                         '[NS: ' + rdata.to_text() + ']')
                 return
         msg.send('ℹ️ Not using shared Cloudflare nameservers.')
     except dns.resolver.NoAnswer:
@@ -71,7 +85,11 @@ def uses_cloudflare(url):
 
 
 def has_mail(url):
-    """If the domain has MX records configured, what are they?"""
+    """Output first MX record found if available.
+
+    :param url: The site address
+    :type url: string
+    """
     url = scan.clean_url(url)
     try:
         answers = dns.resolver.query(url, 'MX')

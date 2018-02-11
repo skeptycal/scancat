@@ -6,7 +6,11 @@ from .message import msg
 
 
 def detect_plugins(soup=None):
-    """Detect plugins of interest."""
+    """Output found plugins of interest.
+
+    :param soup: The parsed HTML, defaults to None
+    :type soup: BeautifulSoup, optional
+    """
     if soup is None:
         logging.info('⚠️ No HTML content available.')
         return
@@ -36,7 +40,11 @@ def detect_plugins(soup=None):
 
 
 def yoast(soup=None):
-    """Does Yoast SEO appear active?"""
+    """Output Yoast SEO detection status.
+
+    :param soup: The parsed HTML, defaults to None
+    :type soup: BeautifulSoup, optional
+    """
     if soup is None:
         logging.info('⚠️ No HTML content available.')
         return
@@ -49,8 +57,11 @@ def yoast(soup=None):
 
 
 def caching(soup=None):
-    """Do common caching plugin strings appear in HTML?"""
-    # TODO: find more caching plugins and their comment strings.
+    """Output caching plugin strings found in HTML.
+
+    :param soup: The parsed HTML, defaults to None
+    :param soup: BeautifulSoup, optional
+    """
     if soup is None:
         logging.info('⚠️ No HTML content available.')
         return

@@ -7,12 +7,11 @@ from .message import msg
 
 
 def version(soup):
-    """Find the WordPress version using the generator tag in the feed."""
-    # TODO: Use hashes of public files if feed check fails https://github.com/philipjohn/exploit-scanner-hashes.
-    # Use the official core checksum endpoint to build a list of unique hashes for publicly-accessible files?
-    # https://api.wordpress.org/core/checksums/1.0/?version=3.6.1
-    # https://github.com/wp-cli/checksum-command/blob/e7e6128e6a5115fea4c3e1e497c7ace2286f358d/src/Checksum_Core_Command.php#L217
-    # TODO: Guess the feed URL if no link tags are found.
+    """Output the WordPress version using the generator tag in the feed.
+
+    :param soup: The parsed HTML
+    :type soup: BeautifulSoup
+    """
     if soup is None:
         logging.info('⚠️ No HTML content available.')
         return
@@ -37,12 +36,11 @@ def version(soup):
 def is_wp(soup=None, url=None):
     """Is this a WordPress site?
 
-    Arguments:
-        soup {BeautifulSoup}
-        url {string}
-
-    Returns:
-        bool
+    :param soup: The parsed HTML, defaults to None
+    :type soup: BeautifulSoup, optional
+    :param url: Site URL, defaults to None
+    :type url: string, optional
+    :rtype: bool
     """
     wp_found_message = '✅ WordPress detected.'
     if url is None and soup is None:
@@ -57,8 +55,11 @@ def is_wp(soup=None, url=None):
 
 
 def coming_soon_page(soup):
-    """Look for possible coming soon page.
-    FIXME: Text like, “New products coming soon” produces false positives. Consider testing for low word count too?
+    """Output a message if a coming soon page is detected.
+    FIXME: Text like, “New products coming soon” produces false positives. Consider checking for low word count too?
+
+    :param soup: The parsed HTML
+    :type soup: BeautifulSoup
     """
     if soup is None:
         logging.info('⚠️ No HTML content available.')
@@ -74,7 +75,11 @@ def coming_soon_page(soup):
 
 
 def html_end_tag_missing(html):
-    """Check raw HTML for missing </html>, which suggests a fatal error."""
+    """Warn if raw HTML omits </html>, which suggests a fatal error.
+
+    :param html: The unparsed HTML
+    :type html: string
+    """
     if html is None:
         logging.info('⚠️ No HTML content available.')
         return
@@ -85,11 +90,10 @@ def html_end_tag_missing(html):
 def parse_stylesheet_header(css):
     """Get WordPress theme data from CSS file contents via the comment header.
 
-    Arguments:
-        css {string} -- The contents of the CSS file.
-
-    Returns:
-        dict -- Theme info. See https://codex.wordpress.org/File_Header
+    :param css: The contents of the CSS file
+    :type css: string
+    :return: Theme info. See https://codex.wordpress.org/File_Header
+    :rtype: dict
     """
     headers = [
         'Theme Name',
