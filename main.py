@@ -5,12 +5,14 @@ This tool accelerates the collection of data needed to solve support issues
 with websites. The information it gives is publicly available via browser
 developer tools and DNS.
 """
+import os
 import sys
 import logging
 import random
 
 from flask import Flask, render_template
 from flask_sockets import Sockets
+from flask_sslify import SSLify
 
 from scancat import plugins, scan, spdns, themes, wordpress
 from scancat.message import msg
@@ -18,6 +20,12 @@ from scancat.message import msg
 
 app = Flask(__name__)
 sockets = Sockets(app)
+sslify = SSLify(app)
+
+
+app.debug = True
+if 'PRODUCTION' in os.environ:
+    app.debug = False
 
 
 @app.route('/')
