@@ -15,7 +15,7 @@
 
         form.addEventListener("submit", function (event) {
             output.innerHTML = '';
-            doSend(urlField.value);
+            doSend(urlField.value.trim());
             event.preventDefault();
             urlField.value = '';
         });

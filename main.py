@@ -65,6 +65,7 @@ def start_scan(url, ws=None):
     """Scrape HTML from the URL and run tests."""
     logging.basicConfig(level=logging.INFO)
     msg.websocket = ws
+    url = url.strip()
     msg.send('🔍 Scanning ' + url + '.', log=True)
     soup, raw_html = scan.get(url)
 
