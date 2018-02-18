@@ -24,12 +24,7 @@ https://www.scancat.io/?url=example.com
 Scan Cat is currently optimised for WordPress sites and StudioPress themes and plugins. Other platform and theme support is planned.
 
 ## To run locally
-1. Do `pipenv install`.
-2. Do `pipenv shell`.
-3. Run `gunicorn -k flask_sockets.worker main:app`.
-4. Visit http://127.0.0.1:8000.
-
-Or with the [heroku CLI](https://devcenter.heroku.com/articles/heroku-cli):
+Use the [heroku CLI](https://devcenter.heroku.com/articles/heroku-cli):
 
 1. Do `pipenv install`.
 2. Do `pipenv shell`.
@@ -40,7 +35,8 @@ Or with the [heroku CLI](https://devcenter.heroku.com/articles/heroku-cli):
 ## To deploy to Heroku
 1. `heroku create`
 2. `git push heroku master`
-3. `heroku open`
+3. `heroku config:set PRODUCTION=true`
+4. `heroku open`
 
 ## To update Heroku
 1. Make changes.
