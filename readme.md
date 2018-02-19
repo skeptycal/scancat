@@ -28,6 +28,7 @@ Use the [heroku CLI](https://devcenter.heroku.com/articles/heroku-cli):
 
 1. Do `pipenv install`.
 2. Do `pipenv shell`.
+3. Run `npm install` and then `npm run build`.
 3. Run `heroku local`.
 4. Visit http://127.0.0.1:5000.
 
