@@ -1,0 +1,31 @@
+{
+  "name": "scancat",
+  "version": "1.0.0",
+  "description": "Scan Cat retrieves public information about websites faster than humans can. It's available at https://www.scancat.io.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickcernis/scancat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickcernis/scancat/issues"
+  },
+  "homepage": "https://github.com/nickcernis/scancat#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.11.0"
+  },
+  "dependencies": {
+    "get-query-param": "^2.0.3",
+    "set-query-string": "^2.2.0"
+  }
+}
