@@ -66,24 +66,24 @@ def start_scan(url, ws=None):
     logging.basicConfig(level=logging.INFO)
     msg.websocket = ws
     url = url.strip()
-    msg.send('🔍 Scanning ' + url + '.', log=True)
+    msg.send('🔍 Sniffing ' + url + '.', log=True)
     soup, raw_html = scan.get(url)
 
-    msg.title('WordPress')
-    wordpress.is_wp(soup)
-    wordpress.version(soup)
-    wordpress.coming_soon_page(soup)
-    wordpress.html_end_tag_missing(raw_html)
+    wp = wordpress.is_wp(soup)
 
-    msg.title('Themes')
-    themes.is_genesis_child_theme(soup)
-    themes.print_theme_info(soup)
-    themes.print_genesis_info(soup)
-
-    msg.title('Plugins')
-    plugins.detect_plugins(soup)
-    plugins.yoast(soup)
-    plugins.caching(soup)
+    if wp:
+        msg.title('WordPress')
+        wordpress.version(soup)
+        wordpress.coming_soon_page(soup)
+        wordpress.html_end_tag_missing(raw_html)
+        msg.title('Themes', level=3)
+        themes.is_genesis_child_theme(soup)
+        themes.print_theme_info(soup)
+        themes.print_genesis_info(soup)
+        msg.title('Plugins', level=3)
+        plugins.detect_plugins(soup)
+        plugins.yoast(soup)
+        plugins.caching(soup)
 
     msg.title('DNS')
     spdns.guess_host(url)
@@ -91,6 +91,9 @@ def start_scan(url, ws=None):
     spdns.has_mail(url)
 
     msg.send('🏁 Scan complete.')
+
+    if ws:
+        ws.close()
 
 
 """Run via command line using first arg as URL."""
