@@ -29,14 +29,17 @@ class Message():
         else:
             print(message)
 
-    def title(self, title):
+    def title(self, title, level=2):
         """Send a title. Used to break messages into sections.
 
         :param title: The text to send to screen or the socket
         :type title: string
+        :param level: The header level to use, defaults to 2
+        :type level: int
         """
         if self.websocket and not self.websocket.closed:
-            self.websocket.send('<h2>' + title + '</h2>')
+            tag = 'h' + str(level)
+            self.websocket.send('<' + tag + '>' + title + '</' + tag + '>')
             logging.debug('Sending title: ' + title)
         else:
             print('\n===' + title + '===')

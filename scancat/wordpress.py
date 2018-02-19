@@ -42,7 +42,7 @@ def is_wp(soup=None, url=None):
     :type url: string, optional
     :rtype: bool
     """
-    wp_found_message = '✅ WordPress detected.'
+    wp_found_message = '👃 Smells like WordPress.'
     if url is None and soup is None:
         msg.send('No HTML or URL provided.')
         return False
