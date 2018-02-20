@@ -16,6 +16,7 @@ function init() {
 
     form.addEventListener("submit", function (event) {
         submitForm();
+        urlField.blur();
         event.preventDefault();
     });
 
