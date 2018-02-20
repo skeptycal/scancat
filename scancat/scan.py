@@ -19,7 +19,7 @@ def get(url, raise_for_status=True):
     :param url: The site url
     :type url: string
     :param raise_for_status: Raise for non-200 response, defaults to True
-    :param raise_for_status: bool, optional
+    :type raise_for_status: bool, optional
     :return: Tuple of parsed HTML and raw HTML
     :rtype: BeautifulSoup, string
     """
