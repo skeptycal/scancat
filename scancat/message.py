@@ -25,7 +25,7 @@ class Message():
             logging.info(message)
         if self.websocket and not self.websocket.closed:
             self.websocket.send(message)
-            logging.debug('Sending: ' + message)
+            logging.debug(f"Sending: {message}")
         else:
             print(message)
 
@@ -39,7 +39,7 @@ class Message():
         """
         if self.websocket and not self.websocket.closed:
             tag = 'h' + str(level)
-            self.websocket.send('<' + tag + '>' + title + '</' + tag + '>')
+            self.websocket.send(f"<{tag}>{title}</{tag}>")
             logging.debug('Sending title: ' + title)
         else:
             print('\n===' + title + '===')

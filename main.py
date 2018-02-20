@@ -66,7 +66,7 @@ def start_scan(url, ws=None):
     logging.basicConfig(level=logging.INFO)
     msg.websocket = ws
     url = url.strip()
-    msg.send('🔍 Sniffing ' + url + '.', log=True)
+    msg.send(f"🔍 Sniffing {url}.", log=True)
     soup, raw_html = scan.get(url)
 
     wp = wordpress.is_wp(soup)

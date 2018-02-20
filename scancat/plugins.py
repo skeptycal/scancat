@@ -73,4 +73,4 @@ def caching(soup=None):
     }
     for plugin_name, search_string in cache_strings.items():
         if(soup.find_all(string=re.compile(search_string))):
-            msg.send('⚡ Found ' + plugin_name + '.')
+            msg.send(f"⚡ Found {plugin_name}.")
