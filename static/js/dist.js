@@ -968,10 +968,15 @@ module.exports = function(queryParam, url) {
 module.exports = isUrl;
 
 /**
- * Matcher.
+ * RegExps.
+ * A URL must match #1 and then at least one of #2/#3.
+ * Use two levels of REs to avoid REDOS.
  */
 
-var matcher = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
+var protocolAndDomainRE = /^(?:\w+:)?\/\/(\S+)$/;
+
+var localhostDomainRE = /^localhost[\:?\d]*(?:[^\:?\d]\S*)?$/
+var nonLocalhostDomainRE = /^[^\s\.]+\.\S{2,}$/;
 
 /**
  * Loosely validate a URL `string`.
@@ -981,7 +986,26 @@ var matcher = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
  */
 
 function isUrl(string){
-  return matcher.test(string);
+  if (typeof string !== 'string') {
+    return false;
+  }
+
+  var match = string.match(protocolAndDomainRE);
+  if (!match) {
+    return false;
+  }
+
+  var everythingAfterProtocol = match[1];
+  if (!everythingAfterProtocol) {
+    return false;
+  }
+
+  if (localhostDomainRE.test(everythingAfterProtocol) ||
+      nonLocalhostDomainRE.test(everythingAfterProtocol)) {
+    return true;
+  }
+
+  return false;
 }
 
 
@@ -1105,15 +1129,15 @@ function keysSorter(input) {
 	return input;
 }
 
-exports.extract = function (str) {
+function extract(str) {
 	var queryStart = str.indexOf('?');
 	if (queryStart === -1) {
 		return '';
 	}
 	return str.slice(queryStart + 1);
-};
+}
 
-exports.parse = function (str, opts) {
+function parse(str, opts) {
 	opts = objectAssign({arrayFormat: 'none'}, opts);
 
 	var formatter = parserForArrayFormat(opts);
@@ -1157,7 +1181,10 @@ exports.parse = function (str, opts) {
 
 		return result;
 	}, Object.create(null));
-};
+}
+
+exports.extract = extract;
+exports.parse = parse;
 
 exports.stringify = function (obj, opts) {
 	var defaults = {
@@ -1208,7 +1235,7 @@ exports.stringify = function (obj, opts) {
 exports.parseUrl = function (str, opts) {
 	return {
 		url: str.split('?')[0] || '',
-		query: this.parse(this.extract(str), opts)
+		query: parse(extract(str), opts)
 	};
 };
 
